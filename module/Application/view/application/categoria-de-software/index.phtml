@@ -1,0 +1,37 @@
+<?php
+$this->placeholder('url')->edit = $this->urlEdit;
+$this->placeholder('url')->delete = $this->urlDelete;
+?>
+<h1>Categoria de Software</h1>
+<table>
+<tr>
+<td>
+<a href="<?=$this->urlEdit?>">Incluir categoria de software</a>
+</td>
+<td>
+<form method="post" action="<?=$this->url('categoria-de-software')?>">
+<input type="text" name="nome">
+<input type="submit" value="pesquisar">
+</form>
+</td>
+</tr>
+</table>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Categoria</th>
+</tr>
+</thead>
+<tbody>
+<?=$this->partialLoop('categorias-de-software.phtml',$this->paginator)?>
+</tbody>
+</table>
+<p>
+<?=$this->paginationControl($this->paginator,
+'Sliding',
+'pagination', ['route' => 'categoria-de-software']); ?>
+</p>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>

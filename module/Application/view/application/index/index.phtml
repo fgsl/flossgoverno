@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<div class="jumbotron">
+    <h1 class="display-4">Cadastros</h1>
+	<ul>
+	<li><a href="<?=$this->url('application',['controller' => 'orgao'])?>">Órgão</a></li>
+	<li><a href="<?=$this->url('application',['controller' => 'tipo-de-orgao'])?>">Tipos de Órgão</a></li>
+	<li><a href="<?=$this->url('application',['controller' => 'software'])?>">Software</a></li>
+	<li><a href="<?=$this->url('application',['controller' => 'categoria-de-software'])?>">Categorias de Software</a></li>
+	<li><a href="<?=$this->url('application',['controller' => 'licenca'])?>">Licença</a></li>
+	<li><a href="<?=$this->url('application',['controller' => 'protocolo'])?>">Protocolo</a></li>
+	<li><a href="<?=$this->url('application',['controller' => 'orgao'])?>">Softwares de um órgão</a></li>
+	<li><a href="<?=$this->url('application',['controller' => 'orgao'])?>">Protocolos de um órgão</a></li>
+	</ul>
+</div>

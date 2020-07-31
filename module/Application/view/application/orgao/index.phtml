@@ -1,0 +1,46 @@
+<?php
+$this->placeholder('url')->edit = $this->urlEdit;
+$this->placeholder('url')->delete = $this->urlDelete;
+?>
+<h1>Órgãos</h1>
+<table>
+<tr>
+<td>
+<a href="<?=$this->urlEdit?>">Incluir órgão</a>
+</td>
+<td>
+<form method="post" action="<?=$this->url('orgao')?>">
+<input type="text" name="nome">
+<input type="submit" value="pesquisar nome">
+</form>
+</td>
+<td>
+<form method="post" action="<?=$this->url('orgao',['action' => 'sigla'])?>">
+<input type="text" name="sigla">
+<input type="submit" value="pesquisar sigla">
+</form>
+</td>
+</tr>
+</table>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Órgão</th>
+<th>Sigla</th>
+<th>Tipo</th>
+<th>Criou SL</th>
+</tr>
+</thead>
+<tbody>
+<?=$this->partialLoop('orgaos.phtml',$this->paginator)?>
+</tbody>
+</table>
+<p>
+<?=$this->paginationControl($this->paginator,
+'Sliding',
+'pagination', ['route' => 'orgao']); ?>
+</p>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>

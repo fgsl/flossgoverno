@@ -1,0 +1,10 @@
+<h1><?=$this->escapeHtml($this->title)?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('licenca',['action' => 'save']));
+$form->prepare();
+?>
+<?=$this->form($this->form)?>
+<p>
+<a href="<?=$this->url('licenca')?>">Voltar</a>
+</p>

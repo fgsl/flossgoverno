@@ -1,0 +1,27 @@
+<?php
+$this->placeholder('url')->edit = $this->urlEdit;
+$this->placeholder('url')->delete = $this->urlDelete;
+?>
+<h1>Tipos de Órgão</h1>
+<p>
+<a href="<?=$this->urlEdit?>">Incluir tipo de órgão</a>
+</p>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Tipo de Órgão</th>
+</tr>
+</thead>
+<tbody>
+<?=$this->partialLoop('tipos-de-orgao.phtml',$this->paginator)?>
+</tbody>
+</table>
+<p>
+<?=$this->paginationControl($this->paginator,
+'Sliding',
+'pagination', ['route' => 'tipo-de-orgao']); ?>
+</p>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>

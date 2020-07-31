@@ -1,0 +1,38 @@
+<?php
+$this->placeholder('url')->edit = $this->urlEdit;
+$this->placeholder('url')->delete = $this->urlDelete;
+?>
+<h1>Protocolos</h1>
+<table>
+<tr>
+<td>
+<a href="<?=$this->urlEdit?>">Incluir protocolo</a>
+</td>
+<td>
+<form method="post" action="<?=$this->url('protocolo')?>">
+<input type="text" name="nome">
+<input type="submit" value="pesquisar">
+</form>
+</td>
+</tr>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Protocolo</th>
+</tr>
+</thead>
+<tbody>
+<?=$this->partialLoop('protocolos.phtml',$this->paginator)?>
+</tbody>
+</table>
+<p>
+<?=$this->paginationControl($this->paginator,
+'Sliding',
+'pagination', ['route' => 'protocolo']); ?>
+</p>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>

@@ -1,0 +1,11 @@
+<tr>
+<td><?=$this->codigo?></td>
+<td><?=$this->escapeHtml($this->nome)?></td>
+<td><?=$this->escapeHtml($this->sigla)?></td>
+<td><?=$this->escapeHtml($this->tipo)?></td>
+<td><?=($this->desenvolveusl ? 'SIM' : 'NÃO')?></td>
+<td>
+<a href="<?=$this->placeholder('url')->edit . '/'. $this->codigo?>">Editar</a>
+<a href="<?=$this->placeholder('url')->delete . '/' . $this->codigo?>">Remover</a>
+</td>
+</tr>

@@ -1,0 +1,10 @@
+<h1><?=$this->escapeHtml($this->title)?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('tipo-de-orgao',['action' => 'save']));
+$form->prepare();
+?>
+<?=$this->form($this->form)?>
+<p>
+<a href="<?=$this->url('tipo-de-orgao')?>">Voltar</a>
+</p>

@@ -1,0 +1,8 @@
+<tr>
+<td><?=$this->codigo?></td>
+<td><?=$this->escapeHtml($this->nome)?></td>
+<td>
+<a href="<?=$this->placeholder('url')->edit . '/'. $this->codigo?>">Editar</a>
+<a href="<?=$this->placeholder('url')->delete . '/' . $this->codigo?>">Remover</a>
+</td>
+</tr>
