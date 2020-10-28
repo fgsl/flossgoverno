@@ -26,6 +26,10 @@ use Application\Controller\LicencaControllerFactory;
 use Application\Controller\SoftwareControllerFactory;
 use Application\Controller\CategoriaDeSoftwareControllerFactory;
 use Application\Controller\ProtocoloControllerFactory;
+use Application\Controller\SoftwareMaisUsadoController;
+use Application\Controller\SoftwareMaisUsadoControllerFactory;
+use Application\Controller\MaiorUsuarioController;
+use Application\Controller\MaiorUsuarioControllerFactory;
 use Laminas\Form\View\Helper\Form;
 use Laminas\Form\View\Helper\FormCheckbox;
 use Laminas\Form\View\Helper\FormElement;
@@ -43,6 +47,8 @@ use Application\Controller\SoftwareDeOrgaoController;
 use Application\Controller\SoftwareDeOrgaoControllerFactory;
 use Application\Controller\ProtocoloDeOrgaoController;
 use Application\Controller\ProtocoloDeOrgaoControllerFactory;
+use Application\Controller\LicencaMaisUsadaController;
+use Application\Controller\LicencaMaisUsadaControllerFactory;
 
 return [
     'router' => [
@@ -148,6 +154,36 @@ return [
                     ],
                 ],
             ],
+            'software-mais-usado' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/software-mais-usado[/:action[/:key]][/page/:page]',
+                    'defaults' => [
+                        'controller' => 'software-mais-usado',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'maior-usuario' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/maior-usuario[/:action[/:key]][/page/:page]',
+                    'defaults' => [
+                        'controller' => 'maior-usuario',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'licenca-mais-usada' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/licenca-mais-usada[/:action[/:key]][/page/:page]',
+                    'defaults' => [
+                        'controller' => 'licenca-mais-usada',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -160,7 +196,10 @@ return [
             'categoria-de-software' => CategoriaDeSoftwareController::class,
             'protocolo'             => ProtocoloController::class,
             'software-de-orgao'     => SoftwareDeOrgaoController::class,
-            'protocolo-de-orgao'    => ProtocoloDeOrgaoController::class
+            'protocolo-de-orgao'    => ProtocoloDeOrgaoController::class,
+            'software-mais-usado'   => SoftwareMaisUsadoController::class,
+            'maior-usuario'         => MaiorUsuarioController::class,
+            'licenca-mais-usada'    => LicencaMaisUsadaController::class            
         ],
         'factories' => [
             IndexController::class                  => InvokableFactory::class,
@@ -171,7 +210,10 @@ return [
             CategoriaDeSoftwareController::class    => CategoriaDeSoftwareControllerFactory::class,
             ProtocoloController::class              => ProtocoloControllerFactory::class,
             SoftwareDeOrgaoController::class        => SoftwareDeOrgaoControllerFactory::class,
-            ProtocoloDeOrgaoController::class       => ProtocoloDeOrgaoControllerFactory::class
+            ProtocoloDeOrgaoController::class       => ProtocoloDeOrgaoControllerFactory::class,
+            SoftwareMaisUsadoController::class      => SoftwareMaisUsadoControllerFactory::class,
+            MaiorUsuarioController::class           => MaiorUsuarioControllerFactory::class,
+            LicencaMaisUsadaController::class       => LicencaMaisUsadaControllerFactory::class
         ],
     ],
     'view_manager' => [

@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var $this Laminas\View\Renderer\PhpRenderer
+ */
+$this->placeholder('url')->delete = $this->urlDelete;
+?>
+<h1>Licenças livres mais usadas</h1>
+<table>
+<thead>
+<tr>
+<th>Licença</th>
+<th>&nbsp;</th>
+<th>Quantidade</th>
+</tr>
+</thead>
+<tbody>
+<?=$this->partialLoop('licencas-mais-usadas.phtml',$this->paginator)?>
+</tbody>
+</table>
+<p>
+<?=$this->paginationControl($this->paginator,
+'Sliding',
+'pagination', ['route' => 'software-de-orgao']); ?>
+</p>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>

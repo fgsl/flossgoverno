@@ -4,15 +4,48 @@
  */
 ?>
 <div class="jumbotron">
-    <h1 class="display-4">Cadastros</h1>
-	<ul>
-	<li><a href="<?=$this->url('application',['controller' => 'orgao'])?>">Órgão</a></li>
-	<li><a href="<?=$this->url('application',['controller' => 'tipo-de-orgao'])?>">Tipos de Órgão</a></li>
-	<li><a href="<?=$this->url('application',['controller' => 'software'])?>">Software</a></li>
-	<li><a href="<?=$this->url('application',['controller' => 'categoria-de-software'])?>">Categorias de Software</a></li>
-	<li><a href="<?=$this->url('application',['controller' => 'licenca'])?>">Licença</a></li>
-	<li><a href="<?=$this->url('application',['controller' => 'protocolo'])?>">Protocolo</a></li>
-	<li><a href="<?=$this->url('application',['controller' => 'software-de-orgao'])?>">Softwares de um órgão</a></li>
-	<li><a href="<?=$this->url('application',['controller' => 'protocolo-de-orgao'])?>">Protocolos de um órgão</a></li>
-	</ul>
+	<h1 class="display-4">Cadastros</h1>
+	<table>
+		<tr>
+			<td>
+				<ul>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'orgao'])?>">Órgão</a></li>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'tipo-de-orgao'])?>">Tipos
+							de Órgão</a></li>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'software'])?>">Software</a></li>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'categoria-de-software'])?>">Categorias
+							de Software</a></li>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'licenca'])?>">Licença</a></li>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'protocolo'])?>">Protocolo</a></li>
+
+				</ul>
+			</td>
+			<td>
+				<ul>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'software-de-orgao'])?>">Softwares
+							de um órgão</a></li>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'protocolo-de-orgao'])?>">Protocolos
+							de um órgão</a></li>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'software-mais-usado'])?>">Software
+							Livres Mais Usados </a></li>
+					<li><a
+						href="<?=$this->url('application',['controller' => 'licenca-mais-usada'])?>">Licenças
+							Livres Mais Usadas </a></li>							
+					<li><a
+						href="<?=$this->url('application',['controller' => 'maior-usuario'])?>">Maiores Usuários
+							de Software Livre</a></li>							
+				</ul>
+			</td>
+		</tr>
+	</table>
+
 </div>

@@ -7,6 +7,7 @@ use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 use Fgsl\Model\AbstractModel;
 use Laminas\Db\Sql\Predicate\Predicate;
+use Laminas\Db\Sql\Expression;
 
 class SoftwareDeOrgaoTable extends AbstractTableGateway
 {
@@ -64,6 +65,55 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         $where = new Where();
         $where->like('orgao.nome', '%' . $name . '%');
         $select->where($where);
+        return $select;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getSelectTotalDeSoftwaresLivres()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total' => new Expression('count(codigo_software)')]);
+        $select->join('software', 'software.codigo=software_orgao.codigo_software',['software' => 'nome']);
+        $select->join('licenca', 'licenca.codigo=software.codigo_licenca',['livre']);
+        $select->where(['licenca.livre' => true]);
+        $select->group('codigo_software');
+        $select->order('total DESC');
+        return $select;
+    }
+
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getSelectTotalDeLicencasLivres()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total' => new Expression('count(codigo_licenca)')]);
+        $select->join('software', 'software.codigo=software_orgao.codigo_software',[]);
+        $select->join('licenca', 'licenca.codigo=software.codigo_licenca',['licenca' => 'nome','livre']);
+        $select->where(['licenca.livre' => true]);
+        $select->group('codigo_licenca');
+        $select->order('total DESC');
+        return $select;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getSelectMaioresUsuarios()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total' => new Expression('count(codigo_orgao)')]);
+        $select->join('orgao', 'orgao.codigo=software_orgao.codigo_orgao',['orgao' => 'nome']);
+        $select->join('software', 'software.codigo=software_orgao.codigo_software',[]);
+        $select->join('licenca', 'licenca.codigo=software.codigo_licenca',['livre']);
+        $select->where(['licenca.livre' => true]);
+        $select->group('codigo_orgao');
+        $select->order('total DESC');
         return $select;
     }
     
