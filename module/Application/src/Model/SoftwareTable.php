@@ -52,4 +52,3 @@ class SoftwareTable extends AbstractTableGateway
         return $select;
     }
 }
-

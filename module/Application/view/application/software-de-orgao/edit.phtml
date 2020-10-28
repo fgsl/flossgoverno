@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<h1><?=$this->escapeHtml($this->title)?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('software-de-orgao',['action' => 'save']));
+$form->prepare();
+?>
+<?=$this->form($form)?>
+<p>
+<a href="<?=$this->url('software-de-orgao')?>">Voltar</a>
+</p>

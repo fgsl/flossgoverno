@@ -39,6 +39,8 @@ use Laminas\Form\View\Helper\FormTextarea;
 use Laminas\Form\View\Helper\FormText;
 use Laminas\Form\View\Helper\FormInput;
 use Laminas\Form\View\Helper\FormNumber;
+use Application\Controller\SoftwareDeOrgaoController;
+use Application\Controller\SoftwareDeOrgaoControllerFactory;
 
 return [
     'router' => [
@@ -123,28 +125,40 @@ return [
                         'action'     => 'index',
                     ],
                 ],
-            ],            
+            ],
+            'software-de-orgao' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/software-de-orgao[/:action[/:key]][/page/:page]',
+                    'defaults' => [
+                        'controller' => 'software-de-orgao',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'aliases' => [
-            'index' => IndexController::class,
-            'tipo-de-orgao' => TipoDeOrgaoController::class,
-            'orgao' => OrgaoController::class,
-            'licenca' => LicencaController::class,
-            'software' => SoftwareController::class,
+            'index'                 => IndexController::class,
+            'tipo-de-orgao'         => TipoDeOrgaoController::class,
+            'orgao'                 => OrgaoController::class,
+            'licenca'               => LicencaController::class,
+            'software'              => SoftwareController::class,
             'categoria-de-software' => CategoriaDeSoftwareController::class,
-            'protocolo' => ProtocoloController::class
+            'protocolo'             => ProtocoloController::class,
+            'software-de-orgao'     => SoftwareDeOrgaoController::class
             
         ],
         'factories' => [
-            IndexController::class => InvokableFactory::class,
-            TipoDeOrgaoController::class => TipoDeOrgaoControllerFactory::class,
-            OrgaoController::class => OrgaoControllerFactory::class,
-            LicencaController::class => LicencaControllerFactory::class,
-            SoftwareController::class => SoftwareControllerFactory::class,
-            CategoriaDeSoftwareController::class => CategoriaDeSoftwareControllerFactory::class,
-            ProtocoloController::class => ProtocoloControllerFactory::class
+            IndexController::class                  => InvokableFactory::class,
+            TipoDeOrgaoController::class            => TipoDeOrgaoControllerFactory::class,
+            OrgaoController::class                  => OrgaoControllerFactory::class,
+            LicencaController::class                => LicencaControllerFactory::class,
+            SoftwareController::class               => SoftwareControllerFactory::class,
+            CategoriaDeSoftwareController::class    => CategoriaDeSoftwareControllerFactory::class,
+            ProtocoloController::class              => ProtocoloControllerFactory::class,
+            SoftwareDeOrgaoController::class        => SoftwareDeOrgaoControllerFactory::class
         ],
     ],
     'view_manager' => [
