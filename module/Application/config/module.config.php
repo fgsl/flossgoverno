@@ -41,6 +41,8 @@ use Laminas\Form\View\Helper\FormInput;
 use Laminas\Form\View\Helper\FormNumber;
 use Application\Controller\SoftwareDeOrgaoController;
 use Application\Controller\SoftwareDeOrgaoControllerFactory;
+use Application\Controller\ProtocoloDeOrgaoController;
+use Application\Controller\ProtocoloDeOrgaoControllerFactory;
 
 return [
     'router' => [
@@ -136,6 +138,16 @@ return [
                     ],
                 ],
             ],
+            'protocolo-de-orgao' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/protocolo-de-orgao[/:action[/:key]][/page/:page]',
+                    'defaults' => [
+                        'controller' => 'protocolo-de-orgao',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -147,8 +159,8 @@ return [
             'software'              => SoftwareController::class,
             'categoria-de-software' => CategoriaDeSoftwareController::class,
             'protocolo'             => ProtocoloController::class,
-            'software-de-orgao'     => SoftwareDeOrgaoController::class
-            
+            'software-de-orgao'     => SoftwareDeOrgaoController::class,
+            'protocolo-de-orgao'    => ProtocoloDeOrgaoController::class
         ],
         'factories' => [
             IndexController::class                  => InvokableFactory::class,
@@ -158,7 +170,8 @@ return [
             SoftwareController::class               => SoftwareControllerFactory::class,
             CategoriaDeSoftwareController::class    => CategoriaDeSoftwareControllerFactory::class,
             ProtocoloController::class              => ProtocoloControllerFactory::class,
-            SoftwareDeOrgaoController::class        => SoftwareDeOrgaoControllerFactory::class
+            SoftwareDeOrgaoController::class        => SoftwareDeOrgaoControllerFactory::class,
+            ProtocoloDeOrgaoController::class       => ProtocoloDeOrgaoControllerFactory::class
         ],
     ],
     'view_manager' => [

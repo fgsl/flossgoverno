@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<tr>
+<td><?=$this->escapeHtml($this->protocolo)?></td>
+<td>&nbsp;</td>
+<td><?=$this->escapeHtml($this->orgao)?></td>
+<td>
+<a href="<?=$this->placeholder('url')->delete . '/' . $this->codigo_protocolo . '-' . $this->codigo_orgao?>">Remover</a>
+</td>
+</tr>
