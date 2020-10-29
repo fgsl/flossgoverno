@@ -58,4 +58,17 @@ class Orgao extends AbstractModel
 
         return $data;
     }
+    
+    public function __get($name){
+        switch ($name) {
+            case 'total_compra'                 :
+            case 'total_justifica'              :
+            case 'total_sem_resposta'           :
+            case 'total_depende_de_avaliacao'   :
+            case 'total_desenvolveu_floss'      :
+                return $this->data[$name];
+            default: 
+                return parent::__get($name);
+        }
+    }
 }

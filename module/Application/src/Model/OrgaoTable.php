@@ -5,6 +5,7 @@ use Fgsl\Db\TableGateway\AbstractTableGateway;
 use Laminas\Db\ResultSet\ResultSetInterface;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
+use Laminas\Db\Sql\Expression;
 
 class OrgaoTable extends AbstractTableGateway
 {
@@ -63,5 +64,70 @@ class OrgaoTable extends AbstractTableGateway
         $where->like('orgao.sigla', '%' . $acronym . '%');
         $select->where($where);
         return $select;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalCompraSoftwareProprietario()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_compra' => new Expression('count(compra)')]);
+        $select->where(['compra' => true]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_compra;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalJustificaCompra()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_justifica' => new Expression('count(justifica)')]);
+        $select->where(['justifica' => true]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_justifica;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalSemResposta()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_sem_resposta' => new Expression('count(semresposta)')]);
+        $select->where(['justifica' => true]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_sem_resposta;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalDependeDeAvaliacao()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_depende_de_avaliacao' => new Expression('count(depende)')]);
+        $select->where(['depende' => true]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_depende_de_avaliacao;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalDesenvolveuFloss()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_desenvolveu_floss' => new Expression('count(desenvolveusl)')]);
+        $select->where(['desenvolveusl' => true]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_desenvolveu_floss;
     }
 }

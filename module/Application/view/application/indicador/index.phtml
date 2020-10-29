@@ -1,0 +1,45 @@
+<?php
+/**
+ * @var $this Laminas\View\Renderer\PhpRenderer
+ */
+?>
+<h1>Indicadores</h1>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>&nbsp;</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compra software proprietário</td>
+<td>&nbsp;</td>
+<td><?=$this->total_compra?></td>
+</tr>
+<tr>
+<td>Justifica a compra de software proprietário</td>
+<td>&nbsp;</td>
+<td><?=$this->total_justifica?></td>
+</tr>
+<tr>
+<td>Não forneceu resposta</td>
+<td>&nbsp;</td>
+<td><?=$this->total_sem_resposta?></td>
+</tr>
+<tr>
+<td>Depende de avaliação técnica</td>
+<td>&nbsp;</td>
+<td><?=$this->total_depende_de_avaliacao?></td>
+</tr>
+<tr>
+<td>Desenvolveu software livre</td>
+<td>&nbsp;</td>
+<td><?=$this->total_desenvolveu_floss?></td>
+</tr>
+</tbody>
+</table>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>

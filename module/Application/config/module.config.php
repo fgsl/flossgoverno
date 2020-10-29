@@ -49,6 +49,8 @@ use Application\Controller\ProtocoloDeOrgaoController;
 use Application\Controller\ProtocoloDeOrgaoControllerFactory;
 use Application\Controller\LicencaMaisUsadaController;
 use Application\Controller\LicencaMaisUsadaControllerFactory;
+use Application\Controller\IndicadorController;
+use Application\Controller\IndicadorControllerFactory;
 
 return [
     'router' => [
@@ -184,6 +186,16 @@ return [
                     ],
                 ],
             ],
+            'indicador' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/indicador[/:action[/:key]][/page/:page]',
+                    'defaults' => [
+                        'controller' => 'indicador',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -199,7 +211,8 @@ return [
             'protocolo-de-orgao'    => ProtocoloDeOrgaoController::class,
             'software-mais-usado'   => SoftwareMaisUsadoController::class,
             'maior-usuario'         => MaiorUsuarioController::class,
-            'licenca-mais-usada'    => LicencaMaisUsadaController::class            
+            'licenca-mais-usada'    => LicencaMaisUsadaController::class,
+            'indicador'             => IndicadorController::class            
         ],
         'factories' => [
             IndexController::class                  => InvokableFactory::class,
@@ -213,7 +226,8 @@ return [
             ProtocoloDeOrgaoController::class       => ProtocoloDeOrgaoControllerFactory::class,
             SoftwareMaisUsadoController::class      => SoftwareMaisUsadoControllerFactory::class,
             MaiorUsuarioController::class           => MaiorUsuarioControllerFactory::class,
-            LicencaMaisUsadaController::class       => LicencaMaisUsadaControllerFactory::class
+            LicencaMaisUsadaController::class       => LicencaMaisUsadaControllerFactory::class,
+            IndicadorController::class              => IndicadorControllerFactory::class
         ],
     ],
     'view_manager' => [
