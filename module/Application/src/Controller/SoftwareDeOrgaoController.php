@@ -51,9 +51,11 @@ class SoftwareDeOrgaoController extends AbstractCrudController
         $orgao = $this->getRequest()->getPost('orgao');
         
         if (!empty($software)){
+            $this->itemCountPerPage = 60;
             return $this->table->getSelectBySoftware($software);            
         }
         if (!empty($orgao)){
+            $this->itemCountPerPage = 60;
             return $this->table->getSelectByOrgao($orgao);
         }            
         
