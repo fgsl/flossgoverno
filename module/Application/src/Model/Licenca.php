@@ -17,7 +17,6 @@ class Licenca extends AbstractModel
             $inputFilter->addInput('livre',false);
             $inputFilter->addFilter('codigo', new ToInt());
             $inputFilter->addFilter('nome', new StringTrim());
-            $inputFilter->addFilter('livre', new Boolean());
             $inputFilter->addValidator('nome', new StringLength(['min'=>3,'max'=>80]));
             $inputFilter->addChains();
             $this->inputFilter = $inputFilter;
