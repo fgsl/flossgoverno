@@ -17,11 +17,14 @@ class SoftwareTable extends AbstractTableGateway
      * @param string $where
      * @return ResultSetInterface
      */
-    public function getModels($where = null)
+    public function getModels($where = null, $order = null)
     {
         $select = $this->getSelect();
         if (!is_null($where)){
             $select->where(['software.codigo' => $where['codigo']]);
+        }
+        if (!is_null($order)){
+            $select->order($order);
         }
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet;

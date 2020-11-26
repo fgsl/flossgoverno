@@ -26,13 +26,13 @@ class SoftwareController extends AbstractCrudController
     {
         $softwareForm = new SoftwareForm();
         $options = [];
-        $categorias = $this->parentTable['categoria']->getModels();
+        $categorias = $this->parentTable['categoria']->getModels(null,'nome');
         foreach($categorias as $categoria){
             $options[$categoria->codigo] = $categoria->nome;
         }
         $softwareForm->get('codigo_categoria')->setValueOptions($options);
         $options = [];
-        $licencas = $this->parentTable['licenca']->getModels();
+        $licencas = $this->parentTable['licenca']->getModels(null,'nome');
         foreach($licencas as $licenca){
             $options[$licenca->codigo] = $licenca->nome;
         }

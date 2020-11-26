@@ -14,6 +14,31 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
     protected $keyName = ['codigo_software','codigo_orgao'];
     
     protected $modelName = 'Application\Model\SoftwareDeOrgao';
+
+    /**
+     *
+     * @param mixed $key
+     * @return AbstractModel
+     */
+    public function getModel($key)
+    {
+        $tokens = explode('-',$key);
+        if (count($tokens) < 2) {
+            $tokens = [0,0];
+        }
+        $models = $this->getModels([
+            $this->keyName[0] => $tokens[0],
+            $this->keyName[1] => $tokens[1]
+        ]);
+        if ($models->count() == 0 || $models->current() == null ){
+            $model = $this->modelName;
+            return new $model(
+                $this->keyName,
+                $this->tableGateway->getTable(),
+                $this->tableGateway->getAdapter());
+        }
+        return $models->current();
+    }
     
     /**
      *
@@ -24,7 +49,7 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
     {
         $select = $this->getSelect();
         if (!is_null($where)){
-            $select->where(['software.codigo' => $where['codigo']]);
+            $select->where($where);
         }
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet;
@@ -52,6 +77,7 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         $where = new Where();
         $where->like('software.nome', '%' . $name . '%');
         $select->where($where);
+        $select->order('orgao.nome');
         return $select;
     }
     
@@ -65,6 +91,7 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         $where = new Where();
         $where->like('orgao.nome', '%' . $name . '%');
         $select->where($where);
+        $select->order('software.nome');
         return $select;
     }
     

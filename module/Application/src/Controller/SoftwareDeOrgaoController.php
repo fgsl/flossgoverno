@@ -26,7 +26,7 @@ class SoftwareDeOrgaoController extends AbstractCrudController
     {
         $softwareDeOrgaoForm = new SoftwareDeOrgaoForm();
         $options = [];
-        $softwares = $this->parentTable['software']->getModels();
+        $softwares = $this->parentTable['software']->getModels(null, 'nome');
         foreach($softwares as $software){
             $options[$software->codigo] = $software->nome;
         }
@@ -42,7 +42,7 @@ class SoftwareDeOrgaoController extends AbstractCrudController
 
     public function getEditTitle($key)
     {
-        return (empty($key) ? 'Incluir ' : 'Alterar ') . 'Software';
+        return (empty($key) ? 'Associar ' : 'Alterar ') . 'Software';
     }
     
     protected function getSelect()
