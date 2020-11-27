@@ -10,47 +10,51 @@ declare(strict_types=1);
 
 namespace Application;
 
-use Laminas\Router\Http\Literal;
-use Laminas\Router\Http\Segment;
-use Laminas\ServiceManager\Factory\InvokableFactory;
-use Application\Controller\IndexController;
 use Application\Controller\CategoriaDeSoftwareController;
-use Application\Controller\OrgaoControllerFactory;
-use Application\Controller\TipoDeOrgaoControllerFactory;
-use Application\Controller\OrgaoController;
-use Application\Controller\LicencaController;
-use Application\Controller\SoftwareController;
-use Application\Controller\ProtocoloController;
-use Application\Controller\TipoDeOrgaoController;
-use Application\Controller\LicencaControllerFactory;
-use Application\Controller\SoftwareControllerFactory;
 use Application\Controller\CategoriaDeSoftwareControllerFactory;
+use Application\Controller\CategoriaMaisUsadaController;
+use Application\Controller\CategoriaMaisUsadaControllerFactory;
+use Application\Controller\IndexController;
+use Application\Controller\IndicadorController;
+use Application\Controller\IndicadorControllerFactory;
+use Application\Controller\LicencaController;
+use Application\Controller\LicencaControllerFactory;
+use Application\Controller\LicencaMaisUsadaController;
+use Application\Controller\LicencaMaisUsadaControllerFactory;
+use Application\Controller\MaiorOrgaoUsuarioController;
+use Application\Controller\MaiorOrgaoUsuarioControllerFactory;
+use Application\Controller\OrgaoController;
+use Application\Controller\OrgaoControllerFactory;
+use Application\Controller\ProtocoloController;
 use Application\Controller\ProtocoloControllerFactory;
+use Application\Controller\ProtocoloDeOrgaoController;
+use Application\Controller\ProtocoloDeOrgaoControllerFactory;
+use Application\Controller\SoftwareController;
+use Application\Controller\SoftwareControllerFactory;
+use Application\Controller\SoftwareDeOrgaoController;
+use Application\Controller\SoftwareDeOrgaoControllerFactory;
 use Application\Controller\SoftwareMaisUsadoController;
 use Application\Controller\SoftwareMaisUsadoControllerFactory;
-use Application\Controller\MaiorUsuarioController;
-use Application\Controller\MaiorUsuarioControllerFactory;
+use Application\Controller\TipoDeOrgaoController;
+use Application\Controller\TipoDeOrgaoControllerFactory;
 use Laminas\Form\View\Helper\Form;
 use Laminas\Form\View\Helper\FormCheckbox;
 use Laminas\Form\View\Helper\FormElement;
 use Laminas\Form\View\Helper\FormElementErrors;
 use Laminas\Form\View\Helper\FormHidden;
+use Laminas\Form\View\Helper\FormInput;
 use Laminas\Form\View\Helper\FormLabel;
+use Laminas\Form\View\Helper\FormNumber;
 use Laminas\Form\View\Helper\FormRow;
 use Laminas\Form\View\Helper\FormSelect;
 use Laminas\Form\View\Helper\FormSubmit;
-use Laminas\Form\View\Helper\FormTextarea;
 use Laminas\Form\View\Helper\FormText;
-use Laminas\Form\View\Helper\FormInput;
-use Laminas\Form\View\Helper\FormNumber;
-use Application\Controller\SoftwareDeOrgaoController;
-use Application\Controller\SoftwareDeOrgaoControllerFactory;
-use Application\Controller\ProtocoloDeOrgaoController;
-use Application\Controller\ProtocoloDeOrgaoControllerFactory;
-use Application\Controller\LicencaMaisUsadaController;
-use Application\Controller\LicencaMaisUsadaControllerFactory;
-use Application\Controller\IndicadorController;
-use Application\Controller\IndicadorControllerFactory;
+use Laminas\Form\View\Helper\FormTextarea;
+use Laminas\Router\Http\Literal;
+use Laminas\Router\Http\Segment;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use Application\Controller\MaiorTipoDeOrgaoUsuarioController;
+use Application\Controller\MaiorTipoDeOrgaoUsuarioControllerFactory;
 
 return [
     'router' => [
@@ -166,12 +170,32 @@ return [
                     ],
                 ],
             ],
-            'maior-usuario' => [
+            'categoria-mais-usada' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/maior-usuario[/:action[/:key]][/page/:page]',
+                    'route'    => '/categoria-mais-usada[/:action[/:key]][/page/:page]',
                     'defaults' => [
-                        'controller' => 'maior-usuario',
+                        'controller' => 'categoria-mais-usada',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'maior-orgao-usuario' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/maior-orgao-usuario[/:action[/:key]][/page/:page]',
+                    'defaults' => [
+                        'controller' => 'maior-orgao-usuario',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'maior-tipo-orgao-usuario' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/maior-tipo-orgao-usuario[/:action[/:key]][/page/:page]',
+                    'defaults' => [
+                        'controller' => 'maior-tipo-de-orgao-usuario',
                         'action'     => 'index',
                     ],
                 ],
@@ -200,34 +224,38 @@ return [
     ],
     'controllers' => [
         'aliases' => [
-            'index'                 => IndexController::class,
-            'tipo-de-orgao'         => TipoDeOrgaoController::class,
-            'orgao'                 => OrgaoController::class,
-            'licenca'               => LicencaController::class,
-            'software'              => SoftwareController::class,
-            'categoria-de-software' => CategoriaDeSoftwareController::class,
-            'protocolo'             => ProtocoloController::class,
-            'software-de-orgao'     => SoftwareDeOrgaoController::class,
-            'protocolo-de-orgao'    => ProtocoloDeOrgaoController::class,
-            'software-mais-usado'   => SoftwareMaisUsadoController::class,
-            'maior-usuario'         => MaiorUsuarioController::class,
-            'licenca-mais-usada'    => LicencaMaisUsadaController::class,
-            'indicador'             => IndicadorController::class            
+            'index'                         => IndexController::class,
+            'tipo-de-orgao'                 => TipoDeOrgaoController::class,
+            'orgao'                         => OrgaoController::class,
+            'licenca'                       => LicencaController::class,
+            'software'                      => SoftwareController::class,
+            'categoria-de-software'         => CategoriaDeSoftwareController::class,
+            'protocolo'                     => ProtocoloController::class,
+            'software-de-orgao'             => SoftwareDeOrgaoController::class,
+            'protocolo-de-orgao'            => ProtocoloDeOrgaoController::class,
+            'software-mais-usado'           => SoftwareMaisUsadoController::class,
+            'categoria-mais-usada'          => CategoriaMaisUsadaController::class,
+            'maior-orgao-usuario'           => MaiorOrgaoUsuarioController::class,
+            'maior-tipo-de-orgao-usuario'   => MaiorTipoDeOrgaoUsuarioController::class,
+            'licenca-mais-usada'            => LicencaMaisUsadaController::class,
+            'indicador'                     => IndicadorController::class            
         ],
         'factories' => [
-            IndexController::class                  => InvokableFactory::class,
-            TipoDeOrgaoController::class            => TipoDeOrgaoControllerFactory::class,
-            OrgaoController::class                  => OrgaoControllerFactory::class,
-            LicencaController::class                => LicencaControllerFactory::class,
-            SoftwareController::class               => SoftwareControllerFactory::class,
-            CategoriaDeSoftwareController::class    => CategoriaDeSoftwareControllerFactory::class,
-            ProtocoloController::class              => ProtocoloControllerFactory::class,
-            SoftwareDeOrgaoController::class        => SoftwareDeOrgaoControllerFactory::class,
-            ProtocoloDeOrgaoController::class       => ProtocoloDeOrgaoControllerFactory::class,
-            SoftwareMaisUsadoController::class      => SoftwareMaisUsadoControllerFactory::class,
-            MaiorUsuarioController::class           => MaiorUsuarioControllerFactory::class,
-            LicencaMaisUsadaController::class       => LicencaMaisUsadaControllerFactory::class,
-            IndicadorController::class              => IndicadorControllerFactory::class
+            IndexController::class                      => InvokableFactory::class,
+            TipoDeOrgaoController::class                => TipoDeOrgaoControllerFactory::class,
+            OrgaoController::class                      => OrgaoControllerFactory::class,
+            LicencaController::class                    => LicencaControllerFactory::class,
+            SoftwareController::class                   => SoftwareControllerFactory::class,
+            CategoriaDeSoftwareController::class        => CategoriaDeSoftwareControllerFactory::class,
+            ProtocoloController::class                  => ProtocoloControllerFactory::class,
+            SoftwareDeOrgaoController::class            => SoftwareDeOrgaoControllerFactory::class,
+            ProtocoloDeOrgaoController::class           => ProtocoloDeOrgaoControllerFactory::class,
+            SoftwareMaisUsadoController::class          => SoftwareMaisUsadoControllerFactory::class,
+            CategoriaMaisUsadaController::class         => CategoriaMaisUsadaControllerFactory::class,
+            MaiorOrgaoUsuarioController::class          => MaiorOrgaoUsuarioControllerFactory::class,
+            MaiorTipoDeOrgaoUsuarioController::class    => MaiorTipoDeOrgaoUsuarioControllerFactory::class,
+            LicencaMaisUsadaController::class           => LicencaMaisUsadaControllerFactory::class,
+            IndicadorController::class                  => IndicadorControllerFactory::class
         ],
     ],
     'view_manager' => [

@@ -2,8 +2,8 @@
 namespace Application\Model;
 
 use Fgsl\Db\TableGateway\AbstractTableGateway;
-use Laminas\Db\Sql\Where;
 use Laminas\Db\ResultSet\ResultSetInterface;
+use Laminas\Db\Sql\Where;
 
 class CategoriaDeSoftwareTable extends AbstractTableGateway
 {

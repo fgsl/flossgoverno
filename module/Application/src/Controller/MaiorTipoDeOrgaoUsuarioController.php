@@ -3,7 +3,7 @@ namespace Application\Controller;
 
 use Fgsl\Mvc\Controller\AbstractCrudController;
 
-class MaiorUsuarioController extends AbstractCrudController
+class MaiorTipoDeOrgaoUsuarioController extends AbstractCrudController
 {
     protected $itemCountPerPage = 10;
     
@@ -23,7 +23,7 @@ class MaiorUsuarioController extends AbstractCrudController
   
     protected function getSelect()
     {
-        return $this->table->getSelectMaioresUsuarios();
+        return $this->table->getSelectMaioresTiposDeOrgaosUsuarios();
     }
  
     public function getForm($full = FALSE)

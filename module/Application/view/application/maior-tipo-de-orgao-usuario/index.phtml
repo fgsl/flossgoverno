@@ -4,23 +4,23 @@
  */
 $this->placeholder('url')->delete = $this->urlDelete;
 ?>
-<h1>Maiores Usuários de Software Livre</h1>
+<h1>Maiores Tipos de Órgãos Usuários de Software Livre</h1>
 <table>
 <thead>
 <tr>
-<th>Usuário</th>
+<th>Tipo de Órgão</th>
 <th>&nbsp;</th>
 <th>Quantidade</th>
 </tr>
 </thead>
 <tbody>
-<?=$this->partialLoop('maiores-usuarios.phtml',$this->paginator)?>
+<?=$this->partialLoop('maiores-tipos-orgaos-usuarios.phtml',$this->paginator)?>
 </tbody>
 </table>
 <p>
 <?=$this->paginationControl($this->paginator,
 'Sliding',
-'pagination', ['route' => 'maior-usuario']); ?>
+'pagination', ['route' => 'maior-tipo-orgao-usuario']); ?>
 </p>
 <p>
 <a href="<?=$this->url('home')?>">Homepage</a>
