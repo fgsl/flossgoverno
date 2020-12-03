@@ -11,6 +11,13 @@ class LicencaTable extends AbstractTableGateway
     
     protected $modelName = 'Application\Model\Licenca';
     
+    public function getSelect()
+    {
+        $select = parent::getSelect();
+        $select->order('nome');
+        return $select;
+    }
+    
     /**
      *
      * @return \Laminas\Db\Sql\Select
@@ -38,6 +45,7 @@ class LicencaTable extends AbstractTableGateway
         if (!is_null($order)){
             $select->order($order);
         }
+
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet;
     }
