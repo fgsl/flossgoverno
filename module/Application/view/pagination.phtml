@@ -2,8 +2,6 @@
 /**
  * @var $this Laminas\View\Renderer\PhpRenderer
  */
-?>
-<?php
 $filterParams = [];
 if (!empty($this->filtern)):
     $filterParams['filtern'] = $this->filtern;
@@ -48,10 +46,12 @@ if (isset($this->next)):
 <a href="<?=$this->url($this->route, $params); ?>">
 Próximo &gt;
 </a>
-<?php else: ?>
+<?php 
+else: 
+?>
 <span class="disabled">Próximo &gt;</span>
-<?php endif; ?>
-<?php endif;
+<?php
+endif; 
 $params = ['action' => 'page', 'key' => $this->last];
 $params = array_merge($params,$filterParams);
 ?>
@@ -59,3 +59,6 @@ $params = array_merge($params,$filterParams);
 Último &gt;&gt;
 </a>
 </div>
+<?php
+endif;
+?>
