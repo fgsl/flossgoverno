@@ -22,6 +22,43 @@ class SoftwareDeOrgaoController extends AbstractCrudController
     
     protected $pageArg = 'key';
     
+    
+    public function indexAction()
+    {
+        $filtern = $this->params('filtern');
+        $filterv = $this->params('filterv');
+        
+        if ($filtern == ''){
+            $filterv = $this->getRequest()->getPost('software');
+            if ($filterv == ''){
+                $filterv = $this->getRequest()->getPost('orgao');
+                if (!empty($filterv)){
+                    $filtern = 'orgao';
+                }
+            } else {
+                $filtern = 'software';
+            }
+        }
+        $view = parent::indexAction();
+        $view->setVariables([
+            'filtern' => $filtern,
+            'filterv' => $filterv
+        ]);
+        return $view;
+    }
+
+    public function pageAction()
+    {
+        $params = [$this->pageArg => $this->params('key')];
+        $filtern = $this->params('filtern');
+        $filterv = $this->params('filterv');
+        if (!empty($filtern)){
+            $params['filtern'] = $filtern;
+            $params['filterv'] = $filterv;
+        }
+        return $this->redirect()->toRoute($this->route, $params);
+    }
+    
     public function getForm($full = FALSE)
     {
         $softwareDeOrgaoForm = new SoftwareDeOrgaoForm();
@@ -50,6 +87,16 @@ class SoftwareDeOrgaoController extends AbstractCrudController
         $software = $this->getRequest()->getPost('software');
         $orgao = $this->getRequest()->getPost('orgao');
         
+        $filtern = $this->params('filtern');
+        $filterv = $this->params('filterv');
+        
+        if ($filtern == 'software'){
+            $software = $filterv;
+        }
+        
+        if ($filtern == 'orgao'){
+            $orgao = $filterv;
+        }        
         if (!empty($software)){
             $this->itemCountPerPage = 60;
             return $this->table->getSelectBySoftware($software);            

@@ -82,7 +82,7 @@ return [
             'orgao' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/orgao[/:action[/:key]][/page/:page]',
+                    'route'    => '/orgao[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'orgao',
                         'action'     => 'index',
@@ -92,7 +92,7 @@ return [
             'tipo-de-orgao' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/tipo-de-orgao[/:action[/:key]][/page/:page]',
+                    'route'    => '/tipo-de-orgao[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'tipo-de-orgao',
                         'action'     => 'index',
@@ -113,7 +113,7 @@ return [
             'categoria-de-software' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/categoria-de-software[/:action[/:key]][/page/:page]',
+                    'route'    => '/categoria-de-software[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'categoria-de-software',
                         'action'     => 'index',
@@ -123,7 +123,7 @@ return [
             'licenca' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/licenca[/:action[/:key]][/page/:page]',
+                    'route'    => '/licenca[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'licenca',
                         'action'     => 'index',
@@ -133,7 +133,7 @@ return [
             'protocolo' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/protocolo[/:action[/:key]][/page/:page]',
+                    'route'    => '/protocolo[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'protocolo',
                         'action'     => 'index',
@@ -143,7 +143,7 @@ return [
             'software-de-orgao' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/software-de-orgao[/:action[/:key]][/page/:page]',
+                    'route'    => '/software-de-orgao[/:action[/:key[/filtern/:filtern/filterv/:filterv]]]',
                     'defaults' => [
                         'controller' => 'software-de-orgao',
                         'action'     => 'index',
@@ -153,7 +153,7 @@ return [
             'protocolo-de-orgao' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/protocolo-de-orgao[/:action[/:key]][/page/:page]',
+                    'route'    => '/protocolo-de-orgao[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'protocolo-de-orgao',
                         'action'     => 'index',
@@ -163,7 +163,7 @@ return [
             'software-mais-usado' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/software-mais-usado[/:action[/:key]][/page/:page]',
+                    'route'    => '/software-mais-usado[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'software-mais-usado',
                         'action'     => 'index',
@@ -173,7 +173,7 @@ return [
             'categoria-mais-usada' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/categoria-mais-usada[/:action[/:key]][/page/:page]',
+                    'route'    => '/categoria-mais-usada[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'categoria-mais-usada',
                         'action'     => 'index',
@@ -183,7 +183,7 @@ return [
             'maior-orgao-usuario' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/maior-orgao-usuario[/:action[/:key]][/page/:page]',
+                    'route'    => '/maior-orgao-usuario[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'maior-orgao-usuario',
                         'action'     => 'index',
@@ -193,7 +193,7 @@ return [
             'maior-tipo-orgao-usuario' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/maior-tipo-orgao-usuario[/:action[/:key]][/page/:page]',
+                    'route'    => '/maior-tipo-orgao-usuario[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'maior-tipo-de-orgao-usuario',
                         'action'     => 'index',
@@ -203,7 +203,7 @@ return [
             'licenca-mais-usada' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/licenca-mais-usada[/:action[/:key]][/page/:page]',
+                    'route'    => '/licenca-mais-usada[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'licenca-mais-usada',
                         'action'     => 'index',
@@ -213,7 +213,7 @@ return [
             'indicador' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/indicador[/:action[/:key]][/page/:page]',
+                    'route'    => '/indicador[/:action[/:key]]',
                     'defaults' => [
                         'controller' => 'indicador',
                         'action'     => 'index',

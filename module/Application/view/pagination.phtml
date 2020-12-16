@@ -3,10 +3,26 @@
  * @var $this Laminas\View\Renderer\PhpRenderer
  */
 ?>
-<?php if ($this->pageCount): ?>
+<?php
+$filterParams = [];
+if (!empty($this->filtern)):
+    $filterParams['filtern'] = $this->filtern;
+    $filterParams['filterv'] = $this->filterv;
+endif;
+if ($this->pageCount):
+    $params = ['action' => 'page', 'key' => $this->first];
+    $params = array_merge($params,$filterParams);
+?>
 <div class="paginationControl">
-<?php if (isset($this->previous)): ?>
-<a href="<?=$this->url($this->route, ['action' => 'page', 'key' => $this->previous]); ?>">
+<a href="<?=$this->url($this->route, $params); ?>">
+&lt;&lt;Primeiro
+</a>
+<?php 
+if (isset($this->previous)):
+    $params = ['action' => 'page', 'key' => $this->previous];
+    $params = array_merge($params,$filterParams);
+?>
+<a href="<?=$this->url($this->route, $params); ?>">
 &lt; Anterior
 </a> |
 <?php else: ?>
@@ -14,21 +30,32 @@
 <?php 
 endif;
 foreach ($this->pagesInRange as $page):
-if ($page != $this->current): ?>
-<a href="<?=$this->url($this->route, ['action' => 'page', 'key' => $page]); ?>">
+if ($page != $this->current):
+    $params = ['action' => 'page', 'key' => $page];
+    $params = array_merge($params,$filterParams);
+?>
+<a href="<?=$this->url($this->route, $params); ?>">
 <?=$page; ?></a> |
 <?php else: ?>
 <?=$page; ?> |
 <?php 
 endif;
 endforeach;
-if (isset($this->next)): 
+if (isset($this->next)):
+    $params = ['action' => 'page', 'key' => $this->next];
+    $params = array_merge($params,$filterParams);
 ?>
-<a href="<?=$this->url($this->route, ['action' => 'page', 'key' => $this->next]); ?>">
+<a href="<?=$this->url($this->route, $params); ?>">
 Próximo &gt;
 </a>
 <?php else: ?>
 <span class="disabled">Próximo &gt;</span>
 <?php endif; ?>
+<?php endif;
+$params = ['action' => 'page', 'key' => $this->last];
+$params = array_merge($params,$filterParams);
+?>
+<a href="<?=$this->url($this->route, $params); ?>">
+Último &gt;&gt;
+</a>
 </div>
-<?php endif; ?>

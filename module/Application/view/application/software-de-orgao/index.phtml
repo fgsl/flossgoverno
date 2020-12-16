@@ -39,7 +39,11 @@ $this->placeholder('url')->delete = $this->urlDelete;
 <p>
 <?=$this->paginationControl($this->paginator,
 'Sliding',
-'pagination', ['route' => 'software-de-orgao']); ?>
+'pagination', [
+    'route' => 'software-de-orgao',
+    'filtern' => $this->filtern,
+    'filterv' => $this->filterv
+]); ?>
 </p>
 <p>
 <a href="<?=$this->url('home')?>">Homepage</a>
