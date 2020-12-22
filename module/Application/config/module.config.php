@@ -102,7 +102,7 @@ return [
             'software' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/software[/[:action[/:key]]]',
+                    'route'    => '/software[/[:action[/:key[/filtern/:filtern/filterv/:filterv]]]]',
                     'defaults' => [
                         'controller' => 'software',
                         'action'     => 'index',
