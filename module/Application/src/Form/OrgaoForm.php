@@ -12,7 +12,7 @@ class OrgaoForm extends AbstractForm
         $this->addElement('tipo_orgao', AbstractForm::SELECT, 'Tipo:',['class'=>'form-control']);
         $this->addElement('sigla', AbstractForm::TEXT,'Sigla:',['class'=>'form-control']);
         $this->addElement('pedidos', AbstractForm::NUMBER, 'Pedidos:',['class'=>'form-control']);
-        $this->addElement('compra', AbstractForm::CHECKBOX, 'Compra software:');
+        $this->addElement('compra', AbstractForm::CHECKBOX, 'Compra software sem justificativa:');
         $this->addElement('justifica', AbstractForm::CHECKBOX, 'Justifica a compra:');
         $this->addElement('semresposta', AbstractForm::CHECKBOX, 'Não respondeu:');
         $this->addElement('depende', AbstractForm::CHECKBOX, 'A compra depende de critérios técnicos:');

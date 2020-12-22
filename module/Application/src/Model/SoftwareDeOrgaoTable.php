@@ -110,6 +110,22 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         $select->order('total DESC');
         return $select;
     }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getSelectTotalDeSoftwaresNaoLivres()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total' => new Expression('count(codigo_software)')]);
+        $select->join('software', 'software.codigo=software_orgao.codigo_software',['software' => 'nome']);
+        $select->join('licenca', 'licenca.codigo=software.codigo_licenca',['livre']);
+        $select->where(['licenca.livre' => false]);
+        $select->group('codigo_software');
+        $select->order('total DESC');
+        return $select;
+    }
 
     /**
      *

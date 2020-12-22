@@ -1,13 +1,13 @@
 <?php
 namespace Application\Controller;
 
+use Application\Model\Orgao;
 use Application\Model\OrgaoTable;
-use Application\Model\TipoDeOrgaoTable;
+use Application\Model\SoftwareTable;
 use Interop\Container\ContainerInterface;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Laminas\Db\ResultSet\ResultSet;
-use Application\Model\Orgao;
 
 class IndicadorControllerFactory implements FactoryInterface
 {
@@ -18,8 +18,8 @@ class IndicadorControllerFactory implements FactoryInterface
         $resultSet->setArrayObjectPrototype(new Orgao('codigo','orgao',$adapter));
         $tableGateway = new TableGateway('orgao', $adapter, null, $resultSet);
         $table = new OrgaoTable($tableGateway);
-        $tableGateway = new TableGateway('tipo_orgao', $adapter);
-        $parentTable = new TipoDeOrgaoTable($tableGateway);
+        $tableGateway = new TableGateway('software', $adapter);
+        $parentTable = new SoftwareTable($tableGateway);
         return new IndicadorController($table, $parentTable);
     }
 }

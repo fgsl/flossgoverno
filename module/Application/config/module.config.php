@@ -55,6 +55,8 @@ use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Application\Controller\MaiorTipoDeOrgaoUsuarioController;
 use Application\Controller\MaiorTipoDeOrgaoUsuarioControllerFactory;
+use Application\Controller\SoftwareNaoLivreMaisUsadoControllerFactory;
+use Application\Controller\SoftwareNaoLivreMaisUsadoController;
 
 return [
     'router' => [
@@ -220,6 +222,16 @@ return [
                     ],
                 ],
             ],
+            'software-nao-livre-mais-usado' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/software-nao-livre-mais-usado[/:action[/:key]]',
+                    'defaults' => [
+                        'controller' => 'software-nao-livre-mais-usado',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -238,7 +250,8 @@ return [
             'maior-orgao-usuario'           => MaiorOrgaoUsuarioController::class,
             'maior-tipo-de-orgao-usuario'   => MaiorTipoDeOrgaoUsuarioController::class,
             'licenca-mais-usada'            => LicencaMaisUsadaController::class,
-            'indicador'                     => IndicadorController::class            
+            'indicador'                     => IndicadorController::class,
+            'software-nao-livre-mais-usado' => SoftwareNaoLivreMaisUsadoController::class,
         ],
         'factories' => [
             IndexController::class                      => InvokableFactory::class,
@@ -255,7 +268,8 @@ return [
             MaiorOrgaoUsuarioController::class          => MaiorOrgaoUsuarioControllerFactory::class,
             MaiorTipoDeOrgaoUsuarioController::class    => MaiorTipoDeOrgaoUsuarioControllerFactory::class,
             LicencaMaisUsadaController::class           => LicencaMaisUsadaControllerFactory::class,
-            IndicadorController::class                  => IndicadorControllerFactory::class
+            IndicadorController::class                  => IndicadorControllerFactory::class,
+            SoftwareNaoLivreMaisUsadoController::class  => SoftwareNaoLivreMaisUsadoControllerFactory::class,
         ],
     ],
     'view_manager' => [

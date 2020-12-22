@@ -5,6 +5,7 @@ use Fgsl\Db\TableGateway\AbstractTableGateway;
 use Laminas\Db\ResultSet\ResultSetInterface;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
+use Laminas\Db\Sql\Expression;
 
 class SoftwareTable extends AbstractTableGateway
 {
@@ -53,5 +54,33 @@ class SoftwareTable extends AbstractTableGateway
         $where->like('software.nome', '%' . $name . '%');
         $select->where($where);
         return $select;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalDeSoftwaresLivres()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_softwares' => new Expression('count(*)')]);
+        $select->join('licenca', 'software.codigo_licenca=licenca.codigo',[]);
+        $select->where(['licenca.livre' => true]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_softwares;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalDeSoftwaresNaoLivres()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_softwares' => new Expression('count(*)')]);
+        $select->join('licenca', 'software.codigo_licenca=licenca.codigo',[]);
+        $select->where(['licenca.livre' => false]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_softwares;
     }
 }

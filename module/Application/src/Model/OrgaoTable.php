@@ -70,6 +70,18 @@ class OrgaoTable extends AbstractTableGateway
      *
      * @return \Laminas\Db\Sql\Select
      */
+    public function getTotalDeOrgaos()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_orgaos' => new Expression('count(*)')]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_orgaos;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
     public function getTotalCompraSoftwareProprietario()
     {
         $select = new Select($this->tableGateway->getTable());
@@ -100,7 +112,7 @@ class OrgaoTable extends AbstractTableGateway
     {
         $select = new Select($this->tableGateway->getTable());
         $select->columns(['total_sem_resposta' => new Expression('count(semresposta)')]);
-        $select->where(['justifica' => true]);
+        $select->where(['semresposta' => true]);
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet->current()->total_sem_resposta;
     }
