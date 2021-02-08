@@ -57,6 +57,10 @@ use Application\Controller\MaiorTipoDeOrgaoUsuarioController;
 use Application\Controller\MaiorTipoDeOrgaoUsuarioControllerFactory;
 use Application\Controller\SoftwareNaoLivreMaisUsadoControllerFactory;
 use Application\Controller\SoftwareNaoLivreMaisUsadoController;
+use Application\Controller\ProdutoresDeSoftwareLivreController;
+use Application\Controller\ProdutoresDeSoftwareLivreControllerFactory;
+use Application\Controller\SistemaOperacionalMaisUsadoController;
+use Application\Controller\SistemaOperacionalMaisUsadoControllerFactory;
 
 return [
     'router' => [
@@ -232,44 +236,68 @@ return [
                     ],
                 ],
             ],
+            'produtores-de-software-livre' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/produtores-de-software-livre[/[:key]]',
+                    'defaults' => [
+                        'controller' => 'produtores-de-software-livre',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'sistema-operacional-mais-usado' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/sistema-operacional-mais-usado[/[:key]]',
+                    'defaults' => [
+                        'controller' => 'sistema-operacional-mais-usado',
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'aliases' => [
-            'index'                         => IndexController::class,
-            'tipo-de-orgao'                 => TipoDeOrgaoController::class,
-            'orgao'                         => OrgaoController::class,
-            'licenca'                       => LicencaController::class,
-            'software'                      => SoftwareController::class,
-            'categoria-de-software'         => CategoriaDeSoftwareController::class,
-            'protocolo'                     => ProtocoloController::class,
-            'software-de-orgao'             => SoftwareDeOrgaoController::class,
-            'protocolo-de-orgao'            => ProtocoloDeOrgaoController::class,
-            'software-mais-usado'           => SoftwareMaisUsadoController::class,
-            'categoria-mais-usada'          => CategoriaMaisUsadaController::class,
-            'maior-orgao-usuario'           => MaiorOrgaoUsuarioController::class,
-            'maior-tipo-de-orgao-usuario'   => MaiorTipoDeOrgaoUsuarioController::class,
-            'licenca-mais-usada'            => LicencaMaisUsadaController::class,
-            'indicador'                     => IndicadorController::class,
-            'software-nao-livre-mais-usado' => SoftwareNaoLivreMaisUsadoController::class,
-        ],
+            'index'                             => IndexController::class,
+            'tipo-de-orgao'                     => TipoDeOrgaoController::class,
+            'orgao'                             => OrgaoController::class,
+            'licenca'                           => LicencaController::class,
+            'software'                          => SoftwareController::class,
+            'categoria-de-software'             => CategoriaDeSoftwareController::class,
+            'protocolo'                         => ProtocoloController::class,
+            'software-de-orgao'                 => SoftwareDeOrgaoController::class,
+            'protocolo-de-orgao'                => ProtocoloDeOrgaoController::class,
+            'software-mais-usado'               => SoftwareMaisUsadoController::class,
+            'categoria-mais-usada'              => CategoriaMaisUsadaController::class,
+            'maior-orgao-usuario'               => MaiorOrgaoUsuarioController::class,
+            'maior-tipo-de-orgao-usuario'       => MaiorTipoDeOrgaoUsuarioController::class,
+            'licenca-mais-usada'                => LicencaMaisUsadaController::class,
+            'indicador'                         => IndicadorController::class,
+            'software-nao-livre-mais-usado'     => SoftwareNaoLivreMaisUsadoController::class,
+            'produtores-de-software-livre'      => ProdutoresDeSoftwareLivreController::class,
+            'sistema-operacional-mais-usado'    => SistemaOperacionalMaisUsadoController::class            
+            ],
         'factories' => [
-            IndexController::class                      => InvokableFactory::class,
-            TipoDeOrgaoController::class                => TipoDeOrgaoControllerFactory::class,
-            OrgaoController::class                      => OrgaoControllerFactory::class,
-            LicencaController::class                    => LicencaControllerFactory::class,
-            SoftwareController::class                   => SoftwareControllerFactory::class,
-            CategoriaDeSoftwareController::class        => CategoriaDeSoftwareControllerFactory::class,
-            ProtocoloController::class                  => ProtocoloControllerFactory::class,
-            SoftwareDeOrgaoController::class            => SoftwareDeOrgaoControllerFactory::class,
-            ProtocoloDeOrgaoController::class           => ProtocoloDeOrgaoControllerFactory::class,
-            SoftwareMaisUsadoController::class          => SoftwareMaisUsadoControllerFactory::class,
-            CategoriaMaisUsadaController::class         => CategoriaMaisUsadaControllerFactory::class,
-            MaiorOrgaoUsuarioController::class          => MaiorOrgaoUsuarioControllerFactory::class,
-            MaiorTipoDeOrgaoUsuarioController::class    => MaiorTipoDeOrgaoUsuarioControllerFactory::class,
-            LicencaMaisUsadaController::class           => LicencaMaisUsadaControllerFactory::class,
-            IndicadorController::class                  => IndicadorControllerFactory::class,
-            SoftwareNaoLivreMaisUsadoController::class  => SoftwareNaoLivreMaisUsadoControllerFactory::class,
+            IndexController::class                          => InvokableFactory::class,
+            TipoDeOrgaoController::class                    => TipoDeOrgaoControllerFactory::class,
+            OrgaoController::class                          => OrgaoControllerFactory::class,
+            LicencaController::class                        => LicencaControllerFactory::class,
+            SoftwareController::class                       => SoftwareControllerFactory::class,
+            CategoriaDeSoftwareController::class            => CategoriaDeSoftwareControllerFactory::class,
+            ProtocoloController::class                      => ProtocoloControllerFactory::class,
+            SoftwareDeOrgaoController::class                => SoftwareDeOrgaoControllerFactory::class,
+            ProtocoloDeOrgaoController::class               => ProtocoloDeOrgaoControllerFactory::class,
+            SoftwareMaisUsadoController::class              => SoftwareMaisUsadoControllerFactory::class,
+            CategoriaMaisUsadaController::class             => CategoriaMaisUsadaControllerFactory::class,
+            MaiorOrgaoUsuarioController::class              => MaiorOrgaoUsuarioControllerFactory::class,
+            MaiorTipoDeOrgaoUsuarioController::class        => MaiorTipoDeOrgaoUsuarioControllerFactory::class,
+            LicencaMaisUsadaController::class               => LicencaMaisUsadaControllerFactory::class,
+            IndicadorController::class                      => IndicadorControllerFactory::class,
+            SoftwareNaoLivreMaisUsadoController::class      => SoftwareNaoLivreMaisUsadoControllerFactory::class,
+            ProdutoresDeSoftwareLivreController::class      => ProdutoresDeSoftwareLivreControllerFactory::class,
+            SistemaOperacionalMaisUsadoController::class    => SistemaOperacionalMaisUsadoControllerFactory::class
         ],
     ],
     'view_manager' => [

@@ -1,0 +1,46 @@
+<?php
+/**
+ * @var $this Laminas\View\Renderer\PhpRenderer
+ */
+?>
+<h1>Órgãos produtores de software livre: <?=$this->paginator->getTotalItemCount()?></h1>
+<table>
+<tr>
+<td>
+<a href="<?=$this->urlEdit?>">Incluir órgão</a>
+</td>
+<td>
+<form method="post" action="<?=$this->url('orgao')?>">
+<input type="text" name="nome">
+<input type="submit" value="pesquisar nome">
+</form>
+</td>
+<td>
+<form method="post" action="<?=$this->url('orgao',['action' => 'sigla'])?>">
+<input type="text" name="sigla">
+<input type="submit" value="pesquisar sigla">
+</form>
+</td>
+</tr>
+</table>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Órgão</th>
+<th>Sigla</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<?=$this->partialLoop('produtores-de-software-livre.phtml',$this->paginator)?>
+</tbody>
+</table>
+<p>
+<?=$this->paginationControl($this->paginator,
+'Sliding',
+'pagination', ['route' => 'produtores-de-software-livre']); ?>
+</p>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>

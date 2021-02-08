@@ -142,4 +142,15 @@ class OrgaoTable extends AbstractTableGateway
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet->current()->total_desenvolveu_floss;
     }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getSelectProdutoresDeSoftwaresLivres()
+    {
+        $select = $this->getSelect();
+        $select->where(['desenvolveusl' => true]);
+        return $select;
+    }
 }

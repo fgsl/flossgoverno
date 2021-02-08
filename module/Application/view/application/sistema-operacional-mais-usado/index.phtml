@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var $this Laminas\View\Renderer\PhpRenderer
+ */
+$this->placeholder('url')->delete = $this->urlDelete;
+?>
+<h1>Sistemas operacionais mais usados</h1>
+<table>
+<thead>
+<tr>
+<th>Sistema operacional</th>
+<th>&nbsp;</th>
+<th>Quantidade</th>
+</tr>
+</thead>
+<tbody>
+<?=$this->partialLoop('sistemas-operacionais-mais-usados.phtml',$this->paginator)?>
+</tbody>
+</table>
+<p>
+<?=$this->paginationControl($this->paginator,
+'Sliding',
+'pagination', ['route' => 'sistema-operacional-mais-usado']); ?>
+</p>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>

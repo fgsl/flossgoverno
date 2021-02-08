@@ -195,6 +195,22 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         return $select;
     }
     
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getSelectSistemasOperacionaisMaisUsados()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total' => new Expression('count(*)')]);
+        $select->join('software', 'software_orgao.codigo_software=software.codigo',['software' => 'nome']);        
+        $select->join('categoria_software', 'software.codigo_categoria=categoria_software.codigo',[]);
+        $select->where(['categoria_software.nome' => str_pad('Sistemas Operacionais',80, ' ', STR_PAD_RIGHT)]);
+        $select->group('software.codigo');
+        $select->order('total DESC');        
+        return $select;
+    }    
+    
     public function save(AbstractModel $model)
     {
         $set = $model->getArrayCopy();
