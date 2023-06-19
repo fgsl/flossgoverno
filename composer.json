@@ -10,8 +10,8 @@
         "framework"
     ],
     "require": {
-        "php": "^7.4",
- 	    "fgslframework/framework": "^2.6"
+        "php": "^8.1",
+ 	    "fgslframework/framework": "^3.0.1"
     },
     "autoload": {
         "psr-4": {
@@ -38,6 +38,6 @@
     },
     "require-dev": {
         "laminas/laminas-developer-tools": "^2.0.1",
-        "laminas/laminas-test": "^3.3.0"
+        "laminas/laminas-test": "^4.8.0"
     }
 }
