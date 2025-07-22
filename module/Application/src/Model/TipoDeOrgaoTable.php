@@ -5,8 +5,8 @@ use Fgsl\Db\TableGateway\AbstractTableGateway;
 
 class TipoDeOrgaoTable extends AbstractTableGateway
 {
-    protected $keyName = 'codigo';
+    protected string $keyName = 'codigo';
     
-    protected $modelName = 'Application\Model\TipoDeOrgao';   
+    protected string $modelName = 'Application\Model\TipoDeOrgao';
 }
 

@@ -1,33 +1,34 @@
 <?php
 namespace Application\Controller;
 
+use Fgsl\Db\TableGateway\AbstractTableGateway;
 use Fgsl\Mvc\Controller\AbstractCrudController;
+use Laminas\Db\Sql\Select;
+use Laminas\Form\Form;
 
 class SistemaOperacionalMaisUsadoController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\Software';
+    protected string $modelClass = 'Application\Model\Software';
     
-    protected $route;
+    protected string $route = 'sistema-operacional-mais-usado';
     
-    protected $table;
+    protected string $tableClass = 'Application\Model\SoftwareTable';
     
-    protected $parentTable;
-    
-    protected $tableClass = 'Application\Model\SoftwareTable';
-    
-    protected $title;
-    
-    protected $pageArg = 'key';
+    protected string $pageArg = 'key';
   
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         return $this->table->getSelectSistemasOperacionaisMaisUsados();
     }
  
-    public function getForm($full = FALSE)
-    {}
-    public function getEditTitle($key)
-    {}   
+    public function getForm($full = false): Form
+    {
+        return new Form();
+    }
+    public function getEditTitle($key): string
+    {
+        return '';
+    }
 }

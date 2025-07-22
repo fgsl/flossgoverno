@@ -2,28 +2,51 @@
 namespace Application\Model;
 
 use Fgsl\Db\TableGateway\AbstractTableGateway;
+use Fgsl\Model\AbstractActiveRecord;
 use Laminas\Db\ResultSet\ResultSetInterface;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
-use Fgsl\Model\AbstractModel;
 use Laminas\Db\Sql\Predicate\Predicate;
 
 class ProtocoloDeOrgaoTable extends AbstractTableGateway
 {
-    protected $keyName = ['codigo_protocolo','codigo_orgao'];
+    protected string $keyName = 'codigo_protocolo-codigo_orgao';
     
-    protected $modelName = 'Application\Model\ProtocoloDeOrgao';
+    protected string $modelName = 'Application\Model\ProtocoloDeOrgao';
+
+    /**
+     *
+     * @param mixed $key
+     */
+    public function getModel($key): AbstractActiveRecord
+    {
+        $key = $key ?? '-';
+        $keyNames = explode('-',$this->keyName);
+        $keyValues = explode('-',$key);
+        $models = $this->getModels([
+            $keyNames[0] => $keyValues[0],
+            $keyNames[1] => $keyValues[1]
+        ]);
+        if ($models->count() == 0 || $models->current() == null ){
+            $model = $this->modelName;
+            return new $model(
+                $keyNames,
+                $this->tableGateway->getTable(),
+                $this->tableGateway->getAdapter());
+        }
+        return $models->current();
+   }
     
     /**
      *
      * @param string $where
      * @return ResultSetInterface
      */
-    public function getModels($where = null)
+    public function getModels($where = null, $order = null): ResultSetInterface
     {
         $select = $this->getSelect();
         if (!is_null($where)){
-            $select->where(['protocolo.codigo' => $where['codigo']]);
+            $select->where($where);
         }
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet;
@@ -33,7 +56,7 @@ class ProtocoloDeOrgaoTable extends AbstractTableGateway
      *
      * @return \Laminas\Db\Sql\Select
      */
-    public function getSelect()
+    public function getSelect(): Select
     {
         $select = new Select($this->tableGateway->getTable());
         $select->join('protocolo', 'protocolo.codigo=protocolo_orgao.codigo_protocolo',['protocolo' => 'nome']);
@@ -68,7 +91,7 @@ class ProtocoloDeOrgaoTable extends AbstractTableGateway
         return $select;
     }
     
-    public function save(AbstractModel $model)
+    public function save(AbstractActiveRecord $model, $excludePrimaryKey = false)
     {
         $set = $model->getArrayCopy();
         try {
@@ -89,5 +112,5 @@ class ProtocoloDeOrgaoTable extends AbstractTableGateway
         $predicate->equalTo('codigo_orgao', $tokens[1]);
         
         $this->tableGateway->delete($where);
-    }    
+    }
 }

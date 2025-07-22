@@ -2,37 +2,42 @@
 namespace Application\Controller;
 
 use Application\Form\ProtocoloDeOrgaoForm;
+use Fgsl\Db\TableGateway\AbstractTableGateway;
 use Fgsl\Mvc\Controller\AbstractCrudController;
+use Laminas\Db\Sql\Select;
+use Laminas\Form\Form;
 
 class ProtocoloDeOrgaoController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\ProtocoloDeOrgao';
+    protected string $modelClass = 'Application\Model\ProtocoloDeOrgao';
     
-    protected $route;
+    protected string $route = 'protocolo-de-orgao';
     
-    protected $table;
+    protected ?AbstractTableGateway $otherParentTable;
     
-    protected $parentTable;
+    protected string $tableClass = 'Application\Model\ProtocoloDeOrgaoTable';
     
-    protected $tableClass = 'Application\Model\ProtocoloDeOrgaoTable';
+    protected string $pageArg = 'key';
+
+
+    public function setOtherParentTable(AbstractTableGateway $otherParentTable)
+    {
+        $this->otherParentTable = $otherParentTable;
+    }
     
-    protected $title;
-    
-    protected $pageArg = 'key';
-    
-    public function getForm($full = FALSE)
+    public function getForm($full = false): Form
     {
         $protocoloDeOrgaoForm = new ProtocoloDeOrgaoForm();
         $options = [];
-        $protocolos = $this->parentTable['protocolo']->getModels();
+        $protocolos = $this->parentTable->getModels();
         foreach($protocolos as $protocolo){
             $options[$protocolo->codigo] = $protocolo->nome;
         }
         $protocoloDeOrgaoForm->get('codigo_protocolo')->setValueOptions($options);
         $options = [];
-        $orgaos = $this->parentTable['orgao']->getModels();
+        $orgaos = $this->otherParentTable->getModels();
         foreach($orgaos as $orgao){
             $options[$orgao->codigo] = $orgao->nome;
         }
@@ -40,23 +45,23 @@ class ProtocoloDeOrgaoController extends AbstractCrudController
         return $protocoloDeOrgaoForm;
     }
 
-    public function getEditTitle($key)
+    public function getEditTitle($key): string
     {
         return (empty($key) ? 'Incluir ' : 'Alterar ') . 'Protocolo';
     }
     
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         $protocolo = $this->getRequest()->getPost('protocolo');
         $orgao = $this->getRequest()->getPost('orgao');
         
         if (!empty($protocolo)){
-            return $this->table->getSelectByProtocolo($protocolo);            
+            return $this->table->getSelectByProtocolo($protocolo);
         }
         if (!empty($orgao)){
             return $this->table->getSelectByOrgao($orgao);
-        }            
+        }
         
         return $this->table->getSelect();
-    }   
+    }
 }

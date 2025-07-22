@@ -3,36 +3,32 @@ namespace Application\Controller;
 
 use Fgsl\Mvc\Controller\AbstractCrudController;
 use Application\Form\LicencaForm;
+use Laminas\Db\Sql\Select;
+use Laminas\Form\Form;
 
 class LicencaController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\Licenca';
+    protected string $modelClass = 'Application\Model\Licenca';
     
-    protected $route;
+    protected string $route = 'licenca';
     
-    protected $table;
+    protected string $tableClass = 'Application\Model\LicencaTable';
     
-    protected $parentTable;
+    protected string $pageArg = 'key';
     
-    protected $tableClass = 'Application\Model\LicencaTable';
-    
-    protected $title;
-    
-    protected $pageArg = 'key';
-    
-    public function getForm($full = FALSE)
+    public function getForm($full = FALSE): Form
     {
         return new LicencaForm();
     }
     
-    public function getEditTitle($key)
+    public function getEditTitle($key): string
     {
         return (empty($key) ? 'Incluir ' : 'Alterar ') . 'Licença';
     }
 
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         $nome = $this->getRequest()->getPost('nome');
         

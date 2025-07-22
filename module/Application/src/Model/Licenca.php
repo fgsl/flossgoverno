@@ -1,16 +1,15 @@
 <?php
 namespace Application\Model;
 
-use Fgsl\Model\AbstractModel;
 use Fgsl\InputFilter\InputFilter;
+use Fgsl\Model\AbstractActiveRecord;
 use Laminas\Filter\ToInt;
 use Laminas\Filter\StringTrim;
 use Laminas\Validator\StringLength;
-use Laminas\Filter\Boolean;
 
-class Licenca extends AbstractModel
+class Licenca extends AbstractActiveRecord
 {
-    public function getInputFilter()
+    public function getInputFilter(): InputFilter
     {
         if ($this->inputFilter == null){
             $inputFilter = new InputFilter();

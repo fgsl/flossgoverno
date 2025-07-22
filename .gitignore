@@ -9,3 +9,4 @@ config/autoload/local.php
 .project
 .settings/
 .buildpath
+.phpunit.result.cache/

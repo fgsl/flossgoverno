@@ -2,25 +2,29 @@
 namespace Application\Controller;
 
 use Application\Form\SoftwareDeOrgaoForm;
+use Fgsl\Db\TableGateway\AbstractTableGateway;
 use Fgsl\Mvc\Controller\AbstractCrudController;
+use Laminas\Db\Sql\Select;
+use Laminas\Form\Form;
 
 class SoftwareDeOrgaoController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\Software';
+    protected string $modelClass = 'Application\Model\Software';
     
-    protected $route;
+    protected string $route = 'software-de-orgao';
+
+    protected ?AbstractTableGateway $otherParentTable;
     
-    protected $table;
+    protected string $tableClass = 'Application\Model\SoftwareTable';
     
-    protected $parentTable;
-    
-    protected $tableClass = 'Application\Model\SoftwareTable';
-    
-    protected $title;
-    
-    protected $pageArg = 'key';
+    protected string $pageArg = 'key';
+
+    public function setOtherParentTable($otherParentTable)
+    {
+        $this->otherParentTable = $otherParentTable;
+    }
     
     
     public function indexAction()
@@ -59,17 +63,17 @@ class SoftwareDeOrgaoController extends AbstractCrudController
         return $this->redirect()->toRoute($this->route, $params);
     }
     
-    public function getForm($full = FALSE)
+    public function getForm($full = false): Form
     {
         $softwareDeOrgaoForm = new SoftwareDeOrgaoForm();
         $options = [];
-        $softwares = $this->parentTable['software']->getModels(null, 'nome');
+        $softwares = $this->parentTable->getModels(null, 'nome');
         foreach($softwares as $software){
             $options[$software->codigo] = $software->nome;
         }
         $softwareDeOrgaoForm->get('codigo_software')->setValueOptions($options);
         $options = [];
-        $orgaos = $this->parentTable['orgao']->getModels();
+        $orgaos = $this->otherParentTable   ->getModels();
         foreach($orgaos as $orgao){
             $options[$orgao->codigo] = $orgao->nome;
         }
@@ -77,12 +81,12 @@ class SoftwareDeOrgaoController extends AbstractCrudController
         return $softwareDeOrgaoForm;
     }
 
-    public function getEditTitle($key)
+    public function getEditTitle($key): string
     {
         return (empty($key) ? 'Associar ' : 'Alterar ') . 'Software';
     }
     
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         $software = $this->getRequest()->getPost('software');
         $orgao = $this->getRequest()->getPost('orgao');
@@ -96,16 +100,16 @@ class SoftwareDeOrgaoController extends AbstractCrudController
         
         if ($filtern == 'orgao'){
             $orgao = $filterv;
-        }        
+        }
         if (!empty($software)){
             $this->itemCountPerPage = 60;
-            return $this->table->getSelectBySoftware($software);            
+            return $this->table->getSelectBySoftware($software);
         }
         if (!empty($orgao)){
             $this->itemCountPerPage = 60;
             return $this->table->getSelectByOrgao($orgao);
-        }            
+        }
         
         return $this->table->getSelect();
-    }   
+    }
 }

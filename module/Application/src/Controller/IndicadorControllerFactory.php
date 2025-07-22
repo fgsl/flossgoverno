@@ -4,14 +4,14 @@ namespace Application\Controller;
 use Application\Model\Orgao;
 use Application\Model\OrgaoTable;
 use Application\Model\SoftwareTable;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class IndicadorControllerFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $adapter = $container->get('Laminas\Db\Adapter');
         $resultSet = new ResultSet();

@@ -9,16 +9,16 @@ use Laminas\Db\Sql\Expression;
 
 class SoftwareTable extends AbstractTableGateway
 {
-    protected $keyName = 'codigo';
+    protected string $keyName = 'codigo';
     
-    protected $modelName = 'Application\Model\Software';
+    protected string $modelName = 'Application\Model\Software';
     
     /**
      *
      * @param string $where
      * @return ResultSetInterface
      */
-    public function getModels($where = null, $order = null)
+    public function getModels($where = null, $order = null): ResultSetInterface
     {
         $select = $this->getSelect();
         if (!is_null($where)){
@@ -35,7 +35,7 @@ class SoftwareTable extends AbstractTableGateway
      *
      * @return \Laminas\Db\Sql\Select
      */
-    public function getSelect()
+    public function getSelect(): Select
     {
         $select = new Select($this->tableGateway->getTable());
         $select->join('categoria_software', 'software.codigo_categoria=categoria_software.codigo',['categoria' => 'nome']);
@@ -67,7 +67,7 @@ class SoftwareTable extends AbstractTableGateway
         $select->join('licenca', 'software.codigo_licenca=licenca.codigo',[]);
         $select->where(['licenca.livre' => true]);
         $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_softwares;
+        return $resultSet->current()->total_softwares ?? 0;
     }
     
     /**
@@ -81,6 +81,6 @@ class SoftwareTable extends AbstractTableGateway
         $select->join('licenca', 'software.codigo_licenca=licenca.codigo',[]);
         $select->where(['licenca.livre' => false]);
         $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_softwares;
+        return $resultSet->current()->total_softwares ?? 0;
     }
 }

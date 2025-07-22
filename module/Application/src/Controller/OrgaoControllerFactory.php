@@ -3,15 +3,15 @@ namespace Application\Controller;
 
 use Application\Model\OrgaoTable;
 use Application\Model\TipoDeOrgaoTable;
-use Interop\Container\ContainerInterface;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\Db\ResultSet\ResultSet;
 use Application\Model\Orgao;
+use Psr\Container\ContainerInterface;
 
 class OrgaoControllerFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $adapter = $container->get('Laminas\Db\Adapter');
         $resultSet = new ResultSet();

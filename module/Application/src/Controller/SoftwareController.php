@@ -3,24 +3,30 @@ namespace Application\Controller;
 
 use Fgsl\Mvc\Controller\AbstractCrudController;
 use Application\Form\SoftwareForm;
+use Fgsl\Db\TableGateway\AbstractTableGateway;
+use Laminas\Db\Sql\Select;
+use Laminas\Form\Form;
 
 class SoftwareController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\Software';
+    protected string $modelClass = 'Application\Model\Software';
     
-    protected $route;
+    protected string $route = 'software';
+
+    protected ?AbstractTableGateway $otherParentTable;
     
-    protected $table;
+    protected string $tableClass = 'Application\Model\SoftwareTable';
     
-    protected $parentTable;
+    protected string $title;
     
-    protected $tableClass = 'Application\Model\SoftwareTable';
-    
-    protected $title;
-    
-    protected $pageArg = 'key';
+    protected string $pageArg = 'key';
+
+    public function setOtherParentTable(AbstractTableGateway $otherParentTable)
+    {
+        $this->otherParentTable = $otherParentTable;
+    }
     
     public function indexAction()
     {
@@ -51,19 +57,19 @@ class SoftwareController extends AbstractCrudController
             $params['filterv'] = $filterv;
         }
         return $this->redirect()->toRoute($this->route, $params);
-    }    
+    }
     
-    public function getForm($full = FALSE)
+    public function getForm($full = false): Form
     {
         $softwareForm = new SoftwareForm();
         $options = [];
-        $categorias = $this->parentTable['categoria']->getModels(null,'nome');
+        $categorias = $this->parentTable->getModels(null,'nome');
         foreach($categorias as $categoria){
             $options[$categoria->codigo] = $categoria->nome;
         }
         $softwareForm->get('codigo_categoria')->setValueOptions($options);
         $options = [];
-        $licencas = $this->parentTable['licenca']->getModels(null,'nome');
+        $licencas = $this->otherParentTable->getModels(null,'nome');
         foreach($licencas as $licenca){
             $options[$licenca->codigo] = $licenca->nome;
         }
@@ -71,18 +77,18 @@ class SoftwareController extends AbstractCrudController
         return $softwareForm;
     }
 
-    public function getEditTitle($key)
+    public function getEditTitle($key): string
     {
         return (empty($key) ? 'Incluir ' : 'Alterar ') . 'Software';
     }
     
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         $nome = $this->getRequest()->getPost('nome');
         
         if (empty($nome)){
             $nome = $this->params('filterv');
-        }        
+        }
         
         return empty($nome) ? $this->table->getSelect() : $this->table->getSelectByName($nome);
     }
