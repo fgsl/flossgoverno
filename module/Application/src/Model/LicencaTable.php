@@ -4,14 +4,15 @@ namespace Application\Model;
 use Fgsl\Db\TableGateway\AbstractTableGateway;
 use Laminas\Db\Sql\Where;
 use Laminas\Db\ResultSet\ResultSetInterface;
+use Laminas\Db\Sql\Select;
 
 class LicencaTable extends AbstractTableGateway
 {
-    protected $keyName = 'codigo';
+    protected string $keyName = 'codigo';
     
-    protected $modelName = 'Application\Model\Licenca';
+    protected string $modelName = 'Application\Model\Licenca';
     
-    public function getSelect()
+    public function getSelect(): Select
     {
         $select = parent::getSelect();
         $select->order('nome');
@@ -36,7 +37,7 @@ class LicencaTable extends AbstractTableGateway
      * @param string $where
      * @return ResultSetInterface
      */
-    public function getModels($where = null, $order = null)
+    public function getModels($where = null, $order = null): ResultSetInterface
     {
         $select = $this->getSelect();
         if (!is_null($where)){

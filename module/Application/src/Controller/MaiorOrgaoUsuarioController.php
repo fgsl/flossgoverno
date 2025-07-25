@@ -2,32 +2,32 @@
 namespace Application\Controller;
 
 use Fgsl\Mvc\Controller\AbstractCrudController;
+use Laminas\Db\Sql\Select;
+use Laminas\Form\Form;
 
 class MaiorOrgaoUsuarioController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\Software';
+    protected string $modelClass = 'Application\Model\Software';
     
-    protected $route;
+    protected string $route = 'maior-orgao-usuario';
+   
+    protected string $tableClass = 'Application\Model\SoftwareTable';
     
-    protected $table;
-    
-    protected $parentTable;
-    
-    protected $tableClass = 'Application\Model\SoftwareTable';
-    
-    protected $title;
-    
-    protected $pageArg = 'key';
+    protected string $pageArg = 'key';
   
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         return $this->table->getSelectMaioresOrgaosUsuarios();
     }
  
-    public function getForm($full = FALSE)
-    {}
-    public function getEditTitle($key)
-    {}   
+    public function getForm($full = false): Form
+    {
+        return new Form();
+    }
+    public function getEditTitle($key): string
+    {
+        return '';
+    }
 }

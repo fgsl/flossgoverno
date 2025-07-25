@@ -3,31 +3,28 @@ namespace Application\Controller;
 
 use Fgsl\Mvc\Controller\AbstractCrudController;
 use Application\Form\TipoDeOrgaoForm;
+use Laminas\Form\Form;
 
 class TipoDeOrgaoController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\TipoDeOrgao';
+    protected string $modelClass = 'Application\Model\TipoDeOrgao';
     
-    protected $route = 'tipo-de-orgao';
+    protected string $route = 'tipo-de-orgao';
     
-    protected $table;
+    protected string $tableClass = 'Application\Model\TipoDeOrgaoTable';
     
-    protected $parentTable;
+    protected string $title = 'Tipo de Órgão';
     
-    protected $tableClass = 'Application\Model\TipoDeOrgaoTable';
+    protected string $pageArg = 'key';
     
-    protected $title = 'Tipo de Órgão';
-    
-    protected $pageArg = 'key';
-    
-    public function getForm($full = FALSE)
+    public function getForm($full = false): Form
     {
         return new TipoDeOrgaoForm();
     }
 
-    public function getEditTitle($key)
+    public function getEditTitle($key): string
     {
         return (empty($key) ? 'Incluir ' : 'Alterar ') . 'Tipo de Órgão';
     }

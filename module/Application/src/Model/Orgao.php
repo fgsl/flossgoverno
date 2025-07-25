@@ -2,7 +2,7 @@
 namespace Application\Model;
 
 use Fgsl\InputFilter\InputFilter;
-use Fgsl\Model\AbstractModel;
+use Fgsl\Model\AbstractActiveRecord;
 use Laminas\Filter\Boolean;
 use Laminas\Filter\StringTrim;
 use Laminas\Filter\ToInt;
@@ -10,9 +10,9 @@ use Laminas\I18n\Validator\IsInt;
 use Laminas\Validator\NotEmpty;
 use Laminas\Validator\StringLength;
 
-class Orgao extends AbstractModel
+class Orgao extends AbstractActiveRecord
 {
-    public function getInputFilter()
+    public function getInputFilter(): InputFilter
     {
         if ($this->inputFilter == null){
             $inputFilter = new InputFilter();

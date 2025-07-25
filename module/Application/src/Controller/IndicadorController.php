@@ -8,11 +8,9 @@ use Application\Model\SoftwareTable;
 
 class IndicadorController extends AbstractActionController
 {
-    /** @var OrgaoTable **/
-    private $orgaoTable;
+    private OrgaoTable $orgaoTable;
     
-    /** @var SoftwareTable **/
-    private $softwareTable;
+    private SoftwareTable $softwareTable;
     
     public function __construct(OrgaoTable $orgaoTable, SoftwareTable $softwareTable)
     {

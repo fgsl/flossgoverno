@@ -1,15 +1,15 @@
 <?php
 namespace Application\Model;
 
-use Fgsl\Model\AbstractModel;
 use Fgsl\InputFilter\InputFilter;
+use Fgsl\Model\AbstractActiveRecord;
 use Laminas\Filter\ToInt;
 use Laminas\Filter\StringTrim;
 use Laminas\Validator\StringLength;
 
-class DefaultModel extends AbstractModel
+class DefaultModel extends AbstractActiveRecord
 {
-    public function getInputFilter()
+    public function getInputFilter(): InputFilter
     {
         if ($this->inputFilter == null){
             $inputFilter = new InputFilter();
@@ -24,7 +24,7 @@ class DefaultModel extends AbstractModel
     
     public function getArrayCopy()
     {
-        $data = $this->data;    
+        $data = $this->data;
    
         if (empty($this->data['codigo'])){
             unset($data['codigo']);

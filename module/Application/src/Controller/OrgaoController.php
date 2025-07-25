@@ -3,27 +3,23 @@ namespace Application\Controller;
 
 use Fgsl\Mvc\Controller\AbstractCrudController;
 use Application\Form\OrgaoForm;
+use Laminas\Db\Sql\Select;
+use Laminas\Form\Form;
 use Laminas\View\Model\ViewModel;
 
 class OrgaoController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\Orgao';
+    protected string $modelClass = 'Application\Model\Orgao';
     
-    protected $route;
+    protected string $route = 'orgao';
     
-    protected $table;
+    protected string $tableClass = 'Application\Model\OrgaoTable';
     
-    protected $parentTable;
+    protected string $pageArg = 'key';
     
-    protected $tableClass = 'Application\Model\OrgaoTable';
-    
-    protected $title;
-    
-    protected $pageArg = 'key';
-    
-    public function getForm($full = FALSE)
+    public function getForm($full = false): Form
     {
         $orgaoForm = new OrgaoForm();
         $options = [];
@@ -35,14 +31,14 @@ class OrgaoController extends AbstractCrudController
         return $orgaoForm;
     }
     
-    public function getEditTitle($key)
+    public function getEditTitle($key): string
     {
         return (empty($key) ? 'Incluir ' : 'Alterar ') . 'Órgão';
     }
     
-    protected function getPost()
+    protected function getPost(): \ArrayObject
     {
-        $post = $this->getRequest()->getPost();        
+        $post = $this->getRequest()->getPost();
         $post['compra'] = (bool) $post['compra'];
         $post['justifica'] = (bool) $post['justifica'];
         $post['semresposta'] = (bool) $post['semresposta'];
@@ -50,7 +46,7 @@ class OrgaoController extends AbstractCrudController
         return $post;
     }
     
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         $nome = $this->getRequest()->getPost('nome');
         
@@ -73,5 +69,5 @@ class OrgaoController extends AbstractCrudController
     {
         $alternativeSelect = $this->table->getSelectByAcronym($this->getRequest()->getPost('sigla'));
         return $this->getPaginator($alternativeSelect);
-    }    
+    }
 }

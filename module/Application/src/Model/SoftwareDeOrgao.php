@@ -2,12 +2,12 @@
 namespace Application\Model;
 
 use Fgsl\InputFilter\InputFilter;
-use Fgsl\Model\AbstractModel;
+use Fgsl\Model\AbstractActiveRecord;
 use Laminas\Filter\ToInt;
 
-class SoftwareDeOrgao extends AbstractModel
+class SoftwareDeOrgao extends AbstractActiveRecord
 {
-    public function getInputFilter()
+    public function getInputFilter(): InputFilter
     {
         if ($this->inputFilter == null){
             $inputFilter = new InputFilter();

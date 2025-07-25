@@ -2,32 +2,32 @@
 namespace Application\Controller;
 
 use Fgsl\Mvc\Controller\AbstractCrudController;
+use Laminas\Db\Sql\Select;
+use Laminas\Form\Form;
 
 class CategoriaMaisUsadaController extends AbstractCrudController
 {
-    protected $itemCountPerPage = 10;
+    protected int $itemCountPerPage = 10;
     
-    protected $modelClass = 'Application\Model\Categoria';
+    protected string $modelClass = 'Application\Model\Categoria';
     
-    protected $route;
+    protected string $route = 'categoria-mais-usada';
     
-    protected $table;
+    protected string $tableClass = 'Application\Model\CategoriaTable';
     
-    protected $parentTable;
-    
-    protected $tableClass = 'Application\Model\CategoriaTable';
-    
-    protected $title;
-    
-    protected $pageArg = 'key';
+    protected string $pageArg = 'key';
   
-    protected function getSelect()
+    protected function getSelect(): Select
     {
         return $this->table->getSelectTotalDeCategorias();
     }
  
-    public function getForm($full = FALSE)
-    {}
-    public function getEditTitle($key)
-    {}   
+    public function getForm($full = false): Form
+    {
+        return new Form();
+    }
+    public function getEditTitle($key): string
+    {
+        return '';
+    }
 }

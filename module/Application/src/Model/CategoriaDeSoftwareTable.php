@@ -7,9 +7,9 @@ use Laminas\Db\Sql\Where;
 
 class CategoriaDeSoftwareTable extends AbstractTableGateway
 {
-    protected $keyName = 'codigo';
+    protected string $keyName = 'codigo';
     
-    protected $modelName = 'Application\Model\CategoriaDeSoftware';
+    protected string $modelName = 'Application\Model\CategoriaDeSoftware';
     
     /**
      *
@@ -29,7 +29,7 @@ class CategoriaDeSoftwareTable extends AbstractTableGateway
      * @param string $where
      * @return ResultSetInterface
      */
-    public function getModels($where = null, $order = null)
+    public function getModels($where = null, $order = null): ResultSetInterface
     {
         $select = $this->getSelect();
         if (!is_null($where)){
@@ -40,5 +40,5 @@ class CategoriaDeSoftwareTable extends AbstractTableGateway
         }
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet;
-    }    
+    }
 }

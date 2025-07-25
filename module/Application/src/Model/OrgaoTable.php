@@ -9,16 +9,16 @@ use Laminas\Db\Sql\Expression;
 
 class OrgaoTable extends AbstractTableGateway
 {
-    protected $keyName = 'codigo';
+    protected string $keyName = 'codigo';
     
-    protected $modelName = 'Application\Model\Orgao';
+    protected string $modelName = 'Application\Model\Orgao';
     
     /**
      *
      * @param string $where
      * @return ResultSetInterface
      */
-    public function getModels($where = null)
+    public function getModels($where = null, $order = null): ResultSetInterface
     {
         $select = $this->getSelect();
         if (!is_null($where)){
@@ -32,7 +32,7 @@ class OrgaoTable extends AbstractTableGateway
      *
      * @return \Laminas\Db\Sql\Select
      */
-    public function getSelect()
+    public function getSelect(): Select
     {
         $select = new Select($this->tableGateway->getTable());        
         $select->join('tipo_orgao', 'orgao.tipo_orgao=tipo_orgao.codigo',['tipo' => 'nome']);
@@ -75,7 +75,7 @@ class OrgaoTable extends AbstractTableGateway
         $select = new Select($this->tableGateway->getTable());
         $select->columns(['total_orgaos' => new Expression('count(*)')]);
         $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_orgaos;
+        return $resultSet->current()->total_orgaos ?? 0;
     }
     
     /**
@@ -88,7 +88,7 @@ class OrgaoTable extends AbstractTableGateway
         $select->columns(['total_compra' => new Expression('count(compra)')]);
         $select->where(['compra' => true]);
         $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_compra;
+        return $resultSet->current()->total_compra ?? 0;
     }
     
     /**
@@ -101,7 +101,7 @@ class OrgaoTable extends AbstractTableGateway
         $select->columns(['total_justifica' => new Expression('count(justifica)')]);
         $select->where(['justifica' => true]);
         $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_justifica;
+        return $resultSet->current()->total_justifica ?? 0;
     }
     
     /**
@@ -114,7 +114,7 @@ class OrgaoTable extends AbstractTableGateway
         $select->columns(['total_sem_resposta' => new Expression('count(semresposta)')]);
         $select->where(['semresposta' => true]);
         $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_sem_resposta;
+        return $resultSet->current()->total_sem_resposta ?? 0;
     }
     
     /**
@@ -127,7 +127,7 @@ class OrgaoTable extends AbstractTableGateway
         $select->columns(['total_depende_de_avaliacao' => new Expression('count(depende)')]);
         $select->where(['depende' => true]);
         $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_depende_de_avaliacao;
+        return $resultSet->current()->total_depende_de_avaliacao ?? 0;
     }
     
     /**
@@ -140,7 +140,7 @@ class OrgaoTable extends AbstractTableGateway
         $select->columns(['total_desenvolveu_floss' => new Expression('count(desenvolveusl)')]);
         $select->where(['desenvolveusl' => true]);
         $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_desenvolveu_floss;
+        return $resultSet->current()->total_desenvolveu_floss ?? 0;
     }
     
     /**
